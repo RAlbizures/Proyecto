@@ -41,6 +41,7 @@ public class graph {
 	private JButton btnModificarGasto;
 	private JFrame grafica;
 	private Statement state;
+	//DefaultCategoryDataset datos= new DefaultCategoryDataset();
 
 	/**
 	 * Launch the application.
@@ -69,6 +70,8 @@ public class graph {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		// Crea la grafica
+		//JFreeChart Grafica;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 598, 346);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -209,8 +212,17 @@ public class graph {
 
 			 } 	
 			 if (e.getSource() == btnGraficar) {
-				 	
-				 	grafica.setVisible(true);
+				 /*
+				 	 *Esta instruccion es para darle datos a la grafica 
+				 	*datos.addValue(numero que se muestra en la grafica, Tipo de gasto que es, el nombre que aparece abajo);
+				 	*
+				 	*ChartPanel Panel= new ChartPanel(Grafica);
+				 	*
+				 	*grafica.getContentPane().add(Panel);
+				 	*/
+					grafica.pack();
+					grafica.setVisible(true);
+					grafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        	System.out.println(mydb.prueba());
 		        }
 		        
@@ -236,5 +248,7 @@ public class graph {
 
 	
 	}
+	//Crea la grafica con esas categorias y es de barras vertical
+	//Grafica = ChartFactory.createBarChart("Gastos", "Categorias", "Gasto", datos, PlotOrientation.VERTICAL, true, true, false);
 }	
 
