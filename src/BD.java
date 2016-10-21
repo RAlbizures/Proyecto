@@ -1,13 +1,16 @@
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 
 public class BD {
 	private String url = "jdbc:mysql://localhost/mydb";
  	private String us="root";
  	private String psw= "uvg";
  	private Connection conn;
+ 	private draw grafica;
  	
  	public BD (){
  		conn = null;
@@ -31,10 +34,66 @@ public class BD {
  		return conn;
  	}
  	
- 	public int prueba(){
+ 	public void setDraw(){
+ 		
+ 		//* Inicializa statement para la consulta 
  		java.sql.Statement st = null;
  		String s=new String();
- 		int t=0;
+ 		double[] gasto = new double[4];
+ 		
+ 		//* Crea el statement
+	 	try {
+			st = conn.createStatement();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+	 	
+	 	gasto[0]=getGasto(st,s,"Osio");
+	 	gasto[1]=getGasto(st,s,"Estudios");
+	 	gasto[2]=getGasto(st,s,"Servicio");
+	 	gasto[3]=getGasto(st,s,"Comida");
+	 	
+	 	grafica = new draw(gasto[0],gasto[1],gasto[2],gasto[3]);
+	 	grafica.setTotal();
+	 	for (int i = 0; i<=3; i++){
+	 		gasto[i]=grafica.getPorcentaje(gasto[i]);
+	 	}
+	 	
+	 	
+ 	}
+ 	
+ 	public int getGasto(java.sql.Statement st,String s ,String tipo){
+ 		int n=0;
+ 		
+ 		//* Hace la consulta
+	 	try{
+	 		int monto;
+		 	s = "Select * from Dinero where Tipo = '"+ tipo +"';";
+        	try {
+        		ResultSet rs=st.executeQuery(s);
+        		while (rs.next())
+        	      {
+        	        String id = rs.getString("CantDinero");
+        	        n = Integer.parseInt(id)+n;
+        	        // print the results
+        	      }
+        		st.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	 	} catch (Exception exc){
+	 		exc.printStackTrace();
+	 	}
+ 		
+ 		return n;
+ 	}
+ 	
+ 	public void prueba(){
+ 		java.sql.Statement st = null;
+ 		String s=new String();
+ 		
 	 	try {
 			st = conn.createStatement();
 		} catch (SQLException e2) {
@@ -44,9 +103,18 @@ public class BD {
 	 	
 	 	try{
 	 		int monto;
-		 	s = "Select idDinero from Dinero where idDinero = 16;";
+		 	s = "Select * from Dinero where idDinero = 16;";
         	try {
-				System.out.println(st.executeUpdate(s));
+        		System.out.println("idDinero");
+        		ResultSet rs=st.executeQuery(s);
+        		while (rs.next())
+        	      {
+        	        String id = rs.getString("idDinero");
+        	        
+        	        // print the results
+        	        System.out.format("%s\n", id);
+        	      }
+        		st.close();
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -54,6 +122,6 @@ public class BD {
 	 	} catch (Exception exc){
 	 		exc.printStackTrace();
 	 	}
-	 	return t;
  	}
 }
+
