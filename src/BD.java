@@ -34,7 +34,7 @@ public class BD {
  		return conn;
  	}
  	
- 	public void setDraw(){
+ 	public double[] setDraw(){
  		
  		//* Inicializa statement para la consulta 
  		java.sql.Statement st = null;
@@ -74,7 +74,7 @@ public class BD {
 			e.printStackTrace();
 		}
 	 	
-	 	System.out.println();
+	 	return gasto;
 	 	
  	}
  	
@@ -83,7 +83,6 @@ public class BD {
  		
  		//* Hace la consulta
 	 	try{
-	 		int monto;
 		 	s = "Select * from Dinero where Tipo = '"+ tipo +"';";
         	try {
         		ResultSet rs=st.executeQuery(s);
@@ -117,7 +116,6 @@ public class BD {
 		}
 	 	
 	 	try{
-	 		int monto;
 		 	s = "Select * from Dinero where idDinero = 16;";
         	try {
         		System.out.println("idDinero");
@@ -139,3 +137,4 @@ public class BD {
 	 	}
  	}
 }
+
