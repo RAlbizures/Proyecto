@@ -8,33 +8,37 @@ import com.mysql.jdbc.Statement;
 public class BD {
 	private String url = "jdbc:mysql://localhost/mydb";
  	private String us="root";
- 	private String psw= "uvg";
+ 	private String psw= "root";
  	private Connection conn;
  	private draw grafica;
  	
  	public BD (){
- 		conn = null;
-	 	try{
-			Class.forName("com.mysql.jdbc.Connection");
-			conn = (Connection)DriverManager.getConnection(url, us, psw);
-			if(conn != null)
-			{
-				System.out.println("Conexi-n a base de datos "+url+" . . . Ok");
-			}
-		}
-		catch(SQLException ex){
-			System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
-		}
-		catch(ClassNotFoundException ex){
-			System.out.println(ex);
-		}	
+ 		//conn = null;
+	 	getCon();
  	}
  	
  	public Connection getCon(){
+ 		if (conn == null){
+ 			try{
+ 				Class.forName("com.mysql.jdbc.Connection");
+ 				conn = (Connection)DriverManager.getConnection(url, us, psw);
+ 				if(conn != null)
+ 				{
+ 					System.out.println("Conexi-n a base de datos "+url+" . . . Ok");
+ 				}
+ 			}
+ 			catch(SQLException ex){
+ 				System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
+ 			}
+ 			catch(ClassNotFoundException ex){
+ 				System.out.println(ex);
+ 			}	
+ 		}
  		return conn;
  	}
+
  	
- 	public void setDraw(){
+ 	public double[] setDraw(){
  		
  		//* Inicializa statement para la consulta 
  		java.sql.Statement st = null;
@@ -74,7 +78,7 @@ public class BD {
 			e.printStackTrace();
 		}
 	 	
-	 	System.out.println();
+	 	return gasto;
 	 	
  	}
  	
@@ -83,7 +87,6 @@ public class BD {
  		
  		//* Hace la consulta
 	 	try{
-	 		int monto;
 		 	s = "Select * from Dinero where Tipo = '"+ tipo +"';";
         	try {
         		ResultSet rs=st.executeQuery(s);
@@ -117,7 +120,6 @@ public class BD {
 		}
 	 	
 	 	try{
-	 		int monto;
 		 	s = "Select * from Dinero where idDinero = 16;";
         	try {
         		System.out.println("idDinero");
@@ -139,3 +141,4 @@ public class BD {
 	 	}
  	}
 }
+

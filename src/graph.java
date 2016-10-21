@@ -47,6 +47,7 @@ public class graph {
 	private JButton btnModificarGasto;
 	private Statement state;
 	private JFreeChart Grafica;
+	private BD mydb;
 	
 	DefaultCategoryDataset datos= new DefaultCategoryDataset();
 
@@ -80,7 +81,7 @@ public class graph {
 	 */
 	private void initialize() {
 		// Crea la grafica
-		
+		mydb = new BD();
 		
 		
 		frame = new JFrame();
@@ -185,7 +186,7 @@ public class graph {
 	}
 	
 	class Listener implements ActionListener{
-		private BD mydb = new BD();
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
