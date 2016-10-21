@@ -24,7 +24,7 @@ public class BD {
  				conn = (Connection)DriverManager.getConnection(url, us, psw);
  				if(conn != null)
  				{
- 					System.out.println("Conexi-n a base de datos "+url+" . . . Ok");
+ 					System.out.println("Conexion a base de datos "+url+" . . . Ok");
  				}
  			}
  			catch(SQLException ex){
