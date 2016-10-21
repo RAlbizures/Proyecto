@@ -10,6 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -39,9 +45,10 @@ public class graph {
 	private JButton btnAniadirGasto;
 	private JButton btnIngresarCantidad;
 	private JButton btnModificarGasto;
-	private JFrame grafica;
 	private Statement state;
-	//DefaultCategoryDataset datos= new DefaultCategoryDataset();
+	private JFreeChart Grafica;
+	
+	DefaultCategoryDataset datos= new DefaultCategoryDataset();
 
 	/**
 	 * Launch the application.
@@ -64,6 +71,8 @@ public class graph {
 	 */
 	public graph() {
 		initialize();
+		Grafica = ChartFactory.createBarChart("Gastos", "Categorias", "Gasto", datos, PlotOrientation.VERTICAL, true, true, false);
+		
 	}
 
 	/**
@@ -71,17 +80,13 @@ public class graph {
 	 */
 	private void initialize() {
 		// Crea la grafica
-		//JFreeChart Grafica;
+		
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 598, 346);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		grafica = new JFrame();
-		grafica.setBounds(100, 100, 598, 346);
-		grafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		grafica.getContentPane().setLayout(null);
-		grafica.setVisible(false);
 		
 		
 		JLabel lblIngresarGasto = new JLabel("Ingresar Gasto");
@@ -135,7 +140,7 @@ public class graph {
 		frame.getContentPane().add(textCant);
 		textCant.setColumns(10);
 		
-		JLabel lblNombre = new JLabel("Nombre:");
+		JLabel lblNombre = new JLabel("Gasto (Comentario):");
 		lblNombre.setBounds(42, 54, 109, 16);
 		frame.getContentPane().add(lblNombre);
 		
@@ -176,7 +181,7 @@ public class graph {
 		frame.getContentPane().add(btnAniadirGasto);
 		btnAniadirGasto.addActionListener(new Listener());
 		
-	
+		
 	}
 	
 	class Listener implements ActionListener{
@@ -212,19 +217,23 @@ public class graph {
 
 			 } 	
 			 if (e.getSource() == btnGraficar) {
-				 /*
-				 	 *Esta instruccion es para darle datos a la grafica 
-				 	*datos.addValue(numero que se muestra en la grafica, Tipo de gasto que es, el nombre que aparece abajo);
-				 	*
-				 	*ChartPanel Panel= new ChartPanel(Grafica);
-				 	*
-				 	*grafica.getContentPane().add(Panel);
-				 	*/
+				 	JFrame grafica = new JFrame("");
+				 	double[] n= new double[4];
+				 	//Esta instruccion es para darle datos a la grafica 
+				 	n = mydb.setDraw();
+				 	datos.addValue(n[0],"Ocio","Ocio");
+				 	datos.addValue(n[1],"Estudios","Estudios");
+				 	datos.addValue(n[2],"Servicios","Servicios");
+				 	datos.addValue(n[3],"Comida","Comida");
+				 	
+				 	ChartPanel Panel= new ChartPanel(Grafica);
+				 	
+				 	grafica.getContentPane().add(Panel);
+				 	
 					grafica.pack();
 					grafica.setVisible(true);
+					grafica.setBounds(100, 100, 598, 346);
 					grafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-					
-					mydb.setDraw();
 		        }
 		        
 		     if (e.getSource() == btnVerDatos) {
@@ -250,5 +259,6 @@ public class graph {
 	
 	}
 	//Crea la grafica con esas categorias y es de barras vertical
-	//Grafica = ChartFactory.createBarChart("Gastos", "Categorias", "Gasto", datos, PlotOrientation.VERTICAL, true, true, false);
+	
 }	
+
