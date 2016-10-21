@@ -19,10 +19,13 @@ public class draw {
 		total = ocio+ servicios+ comida + estudios;
 	}
 	
+	public double getTotal(){
+		return total;
+	}
+	
 	public double getPorcentaje(double d){
 		double porcentaje= (d/total)*100;
 		return porcentaje;
 	}
 	
 }
-

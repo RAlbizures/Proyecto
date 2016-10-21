@@ -49,17 +49,32 @@ public class BD {
 			e2.printStackTrace();
 		}
 	 	
+	 	//*Extrae la informacion
 	 	gasto[0]=getGasto(st,s,"Osio");
 	 	gasto[1]=getGasto(st,s,"Estudios");
-	 	gasto[2]=getGasto(st,s,"Servicio");
+	 	gasto[2]=getGasto(st,s,"Servicios");
 	 	gasto[3]=getGasto(st,s,"Comida");
 	 	
+	 	//*Crea grafica con los datos extraidos
 	 	grafica = new draw(gasto[0],gasto[1],gasto[2],gasto[3]);
+	 	
+	 	//*Hace el total
 	 	grafica.setTotal();
+	 	
+	 	//*Rescribe gasto con el porcentaje del gasto
 	 	for (int i = 0; i<=3; i++){
 	 		gasto[i]=grafica.getPorcentaje(gasto[i]);
 	 	}
 	 	
+	 	//*termina la consulta
+	 	try {
+			st.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	 	
+	 	System.out.println();
 	 	
  	}
  	
@@ -78,7 +93,7 @@ public class BD {
         	        n = Integer.parseInt(id)+n;
         	        // print the results
         	      }
-        		st.close();
+        		
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -124,4 +139,3 @@ public class BD {
 	 	}
  	}
 }
-

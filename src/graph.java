@@ -122,7 +122,7 @@ public class graph {
 		btnGraficar.addActionListener(new Listener());
 		
 		cmbTipo = new JComboBox();
-		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Osio","Servicios","Comida","Estudios"}));
+		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Ocio","Servicios","Comida","Estudios"}));
 		cmbTipo.setBounds(158, 90, 116, 22);
 		frame.getContentPane().add(cmbTipo);
 		
@@ -223,7 +223,8 @@ public class graph {
 					grafica.pack();
 					grafica.setVisible(true);
 					grafica.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		        	System.out.println(mydb.prueba());
+					
+					mydb.setDraw();
 		        }
 		        
 		     if (e.getSource() == btnVerDatos) {
@@ -251,4 +252,3 @@ public class graph {
 	//Crea la grafica con esas categorias y es de barras vertical
 	//Grafica = ChartFactory.createBarChart("Gastos", "Categorias", "Gasto", datos, PlotOrientation.VERTICAL, true, true, false);
 }	
-
