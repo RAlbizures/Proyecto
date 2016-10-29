@@ -29,9 +29,8 @@ CREATE TABLE `Dinero` (
   `Tipo` char(50) DEFAULT NULL,
   `dia` int(11) DEFAULT NULL,
   `mes` char(50) DEFAULT NULL,
-  `Monto` int(11) DEFAULT NULL,
   PRIMARY KEY (`idDinero`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,8 +39,32 @@ CREATE TABLE `Dinero` (
 
 LOCK TABLES `Dinero` WRITE;
 /*!40000 ALTER TABLE `Dinero` DISABLE KEYS */;
-INSERT INTO `Dinero` VALUES (1,250,'Libros','Estudios',3,'Enero',0),(2,1000,'Tele','Osio',7,'Enero',0),(3,150,'pizza','Comida',7,'Enero',0),(4,5,'lavanderia ','Servicios',16,'Enero',0),(5,100,'Parque','Osio',28,'Enero',0),(6,50,'hamburguesa','Comida',13,'Agosto',0);
+INSERT INTO `Dinero` VALUES (1,250,'Libros','Estudios',3,'Enero'),(2,1000,'Tele','Osio',7,'Enero'),(3,150,'pizza','Comida',7,'Enero'),(4,5,'lavanderia ','Servicios',16,'Enero'),(5,100,'Parque','Osio',28,'Enero'),(6,50,'hamburguesa','Comida',13,'Agosto'),(7,50,'pizza','Servicios',1,'Febrero,0'),(8,1,'nada','Ocio',1,'Enero'),(9,1,'1','Ocio',1,'Enero'),(10,9,'sadas','Ocio',1,'Enero');
 /*!40000 ALTER TABLE `Dinero` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Monto`
+--
+
+DROP TABLE IF EXISTS `Monto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Monto` (
+  `idMonto` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `monto` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idMonto`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Monto`
+--
+
+LOCK TABLES `Monto` WRITE;
+/*!40000 ALTER TABLE `Monto` DISABLE KEYS */;
+INSERT INTO `Monto` VALUES (1,90);
+/*!40000 ALTER TABLE `Monto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-21  9:09:26
+-- Dump completed on 2016-10-29 17:24:10

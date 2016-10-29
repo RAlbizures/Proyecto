@@ -3,12 +3,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
 public class BD {
 	private String url = "jdbc:mysql://localhost/mydb";
  	private String us="root";
- 	private String psw= "root";
+ 	private String psw= "uvg";
  	private Connection conn;
  	private draw grafica;
  	
@@ -108,9 +109,73 @@ public class BD {
  		return n;
  	}
  	
- 	public void prueba(){
+ 	public String getMonto(){
+ 		String monto=null;
  		java.sql.Statement st = null;
  		String s=new String();
+ 		
+ 		//* Crea el statement
+	 	try {
+			st = conn.createStatement();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+ 		
+ 		//* Hace la consulta
+	 	try{
+		 	s = "Select * from Monto where idMonto = 1;";
+        	try {
+        		ResultSet rs=st.executeQuery(s);
+        		while (rs.next())
+        	      {
+        	        String id = rs.getString("monto");
+        	        monto= id;
+        	        // print the results
+        	      }
+        		
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	 	} catch (Exception exc){
+	 		exc.printStackTrace();
+	 	}
+ 		
+ 		return monto;
+ 	}
+ 	
+ 	public void updateMonto(int cant){
+ 		 
+ 		java.sql.Statement st = null;
+ 		String s=new String();
+ 		int monto = Integer.parseInt(getMonto());
+ 		monto -= cant;
+ 		//* Crea el statement
+	 	try {
+			st = conn.createStatement();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+ 		
+ 		//* Hace la consulta
+	 	PreparedStatement updateEXP;
+		try {
+			updateEXP = (PreparedStatement) conn.prepareStatement("update Monto set monto = "+ monto +";");
+			int updateEXP_done = updateEXP.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+ 		
+ 	}
+ 	
+ 	public void setGasto(int cant,String nom, String tipo, int dia, String mes){
+ 		java.sql.Statement st = null;
+	 	
+ 		updateMonto(cant);
  		
 	 	try {
 			st = conn.createStatement();
@@ -120,18 +185,12 @@ public class BD {
 		}
 	 	
 	 	try{
-		 	s = "Select * from Dinero where idDinero = 16;";
+	 		int monto;
+	 		
+	 		String s;
+		 	s = "INSERT INTO Dinero VALUES (0,"+ cant +" , '" + nom +"', '"+ tipo +"',"+ dia +",'"+ mes +"');";
         	try {
-        		System.out.println("idDinero");
-        		ResultSet rs=st.executeQuery(s);
-        		while (rs.next())
-        	      {
-        	        String id = rs.getString("idDinero");
-        	        
-        	        // print the results
-        	        System.out.format("%s\n", id);
-        	      }
-        		st.close();
+				st.executeUpdate(s);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -140,5 +199,7 @@ public class BD {
 	 		exc.printStackTrace();
 	 	}
  	}
+ 	
+ 	
 }
 

@@ -48,6 +48,7 @@ public class graph {
 	private Statement state;
 	private JFreeChart Grafica;
 	private BD mydb;
+	private JLabel lblMonto;
 	
 	DefaultCategoryDataset datos= new DefaultCategoryDataset();
 
@@ -72,6 +73,7 @@ public class graph {
 	 */
 	public graph() {
 		initialize();
+		//*
 		Grafica = ChartFactory.createBarChart("Gastos", "Categorias", "Gasto", datos, PlotOrientation.VERTICAL, true, true, false);
 		
 	}
@@ -104,7 +106,7 @@ public class graph {
 		textIngreso.setColumns(10);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(158, 53, 116, 22);
+		txtNombre.setBounds(185, 53, 116, 22);
 		frame.getContentPane().add(txtNombre);
 		txtNombre.setColumns(10);
 		
@@ -129,7 +131,7 @@ public class graph {
 		
 		cmbTipo = new JComboBox();
 		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Ocio","Servicios","Comida","Estudios"}));
-		cmbTipo.setBounds(158, 90, 116, 22);
+		cmbTipo.setBounds(185, 90, 116, 22);
 		frame.getContentPane().add(cmbTipo);
 		
 		JLabel lblCosto = new JLabel("Costo:");
@@ -137,12 +139,12 @@ public class graph {
 		frame.getContentPane().add(lblCosto);
 		
 		textCant = new JTextField();
-		textCant.setBounds(158, 122, 116, 22);
+		textCant.setBounds(185, 122, 116, 22);
 		frame.getContentPane().add(textCant);
 		textCant.setColumns(10);
 		
 		JLabel lblNombre = new JLabel("Gasto (Comentario):");
-		lblNombre.setBounds(42, 54, 109, 16);
+		lblNombre.setBounds(12, 53, 155, 16);
 		frame.getContentPane().add(lblNombre);
 		
 		JLabel lblDia = new JLabel("Dia:");
@@ -182,6 +184,11 @@ public class graph {
 		frame.getContentPane().add(btnAniadirGasto);
 		btnAniadirGasto.addActionListener(new Listener());
 		
+		lblMonto = new JLabel("");
+		lblMonto.setBounds(422, 261, 200, 50);
+		frame.getContentPane().add(lblMonto);
+		lblMonto.setText(""+mydb.getMonto());
+		
 		
 	}
 	
@@ -191,36 +198,15 @@ public class graph {
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
 					 	
-					 	java.sql.Statement st = null;
-					 	Connection conn = mydb.getCon();
-					 	
-					 	try {
-							st = conn.createStatement();
-						} catch (SQLException e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
-						}
-					 	
-					 	try{
-					 		int monto;
-					 		
-					 		String s;
-						 	s = "INSERT INTO Dinero VALUES (0,"+ textCant.getText() +" , '" + txtNombre.getText()+"', '"+ cmbTipo.getSelectedItem().toString() +"',"+ cmbDia.getSelectedItem().toString()+",'"+ cmbMes.getSelectedItem().toString()+"', 0 );";
-				        	try {
-								st.executeUpdate(s);
-							} catch (SQLException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-					 	} catch (Exception exc){
-					 		exc.printStackTrace();
-					 	}
-
+					 	mydb.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
+					 	textCant.setText("");
+					 	txtNombre.setText("");
+					 	lblMonto.setText(""+mydb.getMonto());
 			 } 	
 			 if (e.getSource() == btnGraficar) {
 				 	JFrame grafica = new JFrame("");
 				 	double[] n= new double[4];
-				 	//Esta instruccion es para darle datos a la grafica 
+				 	//Esta instruccion es para darle datos a la grafica
 				 	n = mydb.setDraw();
 				 	datos.addValue(n[0],"Ocio","Ocio");
 				 	datos.addValue(n[1],"Estudios","Estudios");
@@ -259,7 +245,5 @@ public class graph {
 
 	
 	}
-	//Crea la grafica con esas categorias y es de barras vertical
-	
 }	
 
