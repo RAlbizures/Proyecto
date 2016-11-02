@@ -23,6 +23,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+* no me maten esto es una prueba
+*/
+
+
 public class graph {
 
 	private JFrame frame;
