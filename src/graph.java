@@ -24,7 +24,12 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 /**
-* no me maten esto es una prueba
+*Esta clase grafica los datos de la base de datos
+*@author: Javier Andres Ramos Galvez 16230 
+*@author: Rodrigo Stuardo Juarez Jui 16073 
+*@author: Rodrigo Javier Albizures Lopez 16767
+*@author: Jose Rodolfo Perez Garcia 16056
+*@version: 11/2/2016
 */
 
 
@@ -196,6 +201,9 @@ public class graph {
 		
 		
 	}
+	/**
+	*Listener del boton aniadirgasto
+	*/
 	
 	class Listener implements ActionListener{
 		
