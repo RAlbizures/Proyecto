@@ -6,18 +6,38 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
+/**
+*Esta clase verifica la conexion con la base de datos
+*@author: Javier Andres Ramos Galvez 16230 
+*@author: Rodrigo Stuardo Juarez Jui 16073 
+*@author: Rodrigo Javier Albizures Lopez 16767
+*@author: Jose Rodolfo Perez Garcia 16056
+*@version: 11/2/2016
+*/
+
+
 public class BD {
 	private String url = "jdbc:mysql://localhost/mydb";
  	private String us="root";
  	private String psw= "uvg";
  	private Connection conn;
  	private draw grafica;
- 	
+	
+ 	/**
+	*Constructor de la clase
+	*/
+	
  	public BD (){
  		//conn = null;
 	 	getCon();
  	}
- 	
+	
+ 	/**
+	*metodo que hace la conexion con el servidor
+	*@return: Conexion con el servidor
+	*/
+	
+	
  	public Connection getCon(){
  		if (conn == null){
  			try{
@@ -38,7 +58,11 @@ public class BD {
  		return conn;
  	}
 
- 	
+ 	/**
+	*Metodo que hace una consulta a la base de datos
+	*@return gasto de la base de datos
+	*/
+	
  	public double[] setDraw(){
  		
  		//* Inicializa statement para la consulta 
@@ -83,6 +107,13 @@ public class BD {
 	 	
  	}
  	
+	/**
+	*Metodo que obtiene el entero de los gastos de la base de datos
+	*@return El entero del gasto
+	*/
+	
+	
+	
  	public int getGasto(java.sql.Statement st,String s ,String tipo){
  		int n=0;
  		
@@ -109,6 +140,12 @@ public class BD {
  		return n;
  	}
  	
+	/**
+	*metodo que hace una constulta a la base de datos  sobre el monto de tipo string
+	*@return String con el monto de la base de datos
+	*/
+	
+	
  	public String getMonto(){
  		String monto=null;
  		java.sql.Statement st = null;
@@ -145,6 +182,10 @@ public class BD {
  		return monto;
  	}
  	
+	/**
+	*Metodo que actualiza los datos de la base de datos
+	*/
+	
  	public void updateMonto(int cant){
  		 
  		java.sql.Statement st = null;
@@ -172,6 +213,12 @@ public class BD {
  		
  	}
  	
+	/**
+	*Metodo que ingresa los gastos en la base de datos
+	*/
+	
+	
+	
  	public void setGasto(int cant,String nom, String tipo, int dia, String mes){
  		java.sql.Statement st = null;
 	 	
