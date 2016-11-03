@@ -36,7 +36,7 @@ import javax.swing.DefaultComboBoxModel;
 public class graph {
 
 	private JFrame frame;
-	private JTextField textIngreso;
+	private JTextField txtIngreso;
 	private JTextField txtNombre;
 	private JTextField textCant;
 	private JLabel lblIngresarGasto;
@@ -110,10 +110,10 @@ public class graph {
 		lblIngresarDinero.setBounds(346, 25, 219, 16);
 		frame.getContentPane().add(lblIngresarDinero);
 		
-		textIngreso = new JTextField();
-		textIngreso.setBounds(364, 54, 116, 22);
-		frame.getContentPane().add(textIngreso);
-		textIngreso.setColumns(10);
+		txtIngreso = new JTextField();
+		txtIngreso.setBounds(364, 54, 116, 22);
+		frame.getContentPane().add(txtIngreso);
+		txtIngreso.setColumns(10);
 		
 		txtNombre = new JTextField();
 		txtNombre.setBounds(185, 53, 116, 22);
@@ -245,13 +245,8 @@ public class graph {
 		        }
 		        
 		     if (e.getSource() == btnIngresarCantidad) {
-		    	 	try{
-			        	int ingreso = Integer.parseInt(textIngreso.getText());
-			        	System.out.println("Pasa algo");
-		    	 	}
-		    	 	catch (Exception s){
-		    	 		
-		    	 	}
+		    	 	mydb.aniadirMonto(Integer.parseInt(txtIngreso.getText()));
+		    	 	lblMonto.setText(""+mydb.getMonto());
 		        }
 		
 		}

@@ -248,5 +248,32 @@ public class BD {
  	}
  	
  	
+ 	public void aniadirMonto(int cant){
+		 
+ 		java.sql.Statement st = null;
+ 		String s=new String();
+ 		int monto = Integer.parseInt(getMonto());
+ 		monto += cant;
+ 		//* Crea el statement
+	 	try {
+			st = conn.createStatement();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+ 		
+ 		//* Hace la consulta
+	 	PreparedStatement updateEXP;
+		try {
+			updateEXP = (PreparedStatement) conn.prepareStatement("update Monto set monto = "+ monto +";");
+			int updateEXP_done = updateEXP.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+ 		
+ 	}
+ 	
 }
 
