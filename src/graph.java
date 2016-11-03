@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -210,11 +211,16 @@ public class graph {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
-					 	
+					 	try{
 					 	mydb.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
 					 	txtNombre.setText("");
 					 	lblMonto.setText(""+mydb.getMonto());
+					 	}
+					 	catch(InputMismatchException e1){
+					 		e1.printStackTrace();
+					 		System.err.println("El valor ingresado no es un numero");
+					 	}
 			 } 	
 			 if (e.getSource() == btnGraficar) {
 				 	JFrame grafica = new JFrame("");
@@ -245,8 +251,14 @@ public class graph {
 		        }
 		        
 		     if (e.getSource() == btnIngresarCantidad) {
+		    	 try{
 		    	 	mydb.aniadirMonto(Integer.parseInt(txtIngreso.getText()));
 		    	 	lblMonto.setText(""+mydb.getMonto());
+		    	 }
+		    	 catch(InputMismatchException e1){
+		    		 e1.printStackTrace();
+		    		 System.err.println("El valor ingresado no es un numero");
+		    	 }
 		        }
 		
 		}
