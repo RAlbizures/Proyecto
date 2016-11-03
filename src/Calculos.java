@@ -1,13 +1,15 @@
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 
 /**
-*Esta clase verifica la conexion con la base de datos
+ * 
+ */
+
+/**
+*Esta clase realiza los calculos del programa
 *@author: Javier Andres Ramos Galvez 16230 
 *@author: Rodrigo Stuardo Juarez Jui 16073 
 *@author: Rodrigo Javier Albizures Lopez 16767
@@ -16,49 +18,44 @@ import com.mysql.jdbc.Statement;
 */
 
 
-public class BD {
-	private String url = "jdbc:mysql://localhost/mydb";
- 	private String us="root";
- 	private String psw= "";
- 	private Connection conn;
- 	private draw grafica;
+public class Calculos {
 	
- 	/**
-	*Constructor de la clase
+	private BD mydb = new BD();
+	private draw grafica;
+	
+	
+	
+	/**
+	*Metodo que obtiene el entero de los gastos de la base de datos
+	*@return El entero del gasto
 	*/
 	
- 	public BD (){
- 		//conn = null;
-	 	getCon();
+ 	public int getGasto(java.sql.Statement st,String s ,String tipo){
+ 		int n=0;
+ 		//* Hace la consulta
+	 	try{
+		 	s = "Select * from Dinero where Tipo = '"+ tipo +"';";
+        	try {
+        		ResultSet rs=st.executeQuery(s);
+        		while (rs.next())
+        	      {
+        	        String id = rs.getString("CantDinero");
+        	        n = Integer.parseInt(id)+n;
+        	        // print the results
+        	      }
+        		
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	 	} catch (Exception exc){
+	 		exc.printStackTrace();
+	 	}
+ 		
+ 		return n;
  	}
 	
- 	/**
-	*metodo que hace la conexion con el servidor
-	*@return: Conexion con el servidor
-	*/
-	
-	
- 	public Connection getCon(){
- 		if (conn == null){
- 			try{
- 				Class.forName("com.mysql.jdbc.Connection");
- 				conn = (Connection)DriverManager.getConnection(url, us, psw);
- 				if(conn != null)
- 				{
- 					System.out.println("Conexion a base de datos "+url+" . . . Ok");
- 				}
- 			}
- 			catch(SQLException ex){
- 				System.out.println("Hubo un problema al intentar conecarse a la base de datos"+url);
- 			}
- 			catch(ClassNotFoundException ex){
- 				System.out.println(ex);
- 			}	
- 		}
- 		return conn;
- 	}
-
- 	/**
+	/**
 	*Metodo que hace una consulta a la base de datos
 	*@return gasto de la base de datos
 	*/
@@ -72,7 +69,7 @@ public class BD {
  		
  		//* Crea el statement
 	 	try {
-			st = conn.createStatement();
+			st = mydb.getCon().createStatement();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -106,41 +103,9 @@ public class BD {
 	 	return gasto;
 	 	
  	}
+	
  	
-	/**
-	*Metodo que obtiene el entero de los gastos de la base de datos
-	*@return El entero del gasto
-	*/
-	
-	
-	
- 	public int getGasto(java.sql.Statement st,String s ,String tipo){
- 		int n=0;
- 		
- 		//* Hace la consulta
-	 	try{
-		 	s = "Select * from Dinero where Tipo = '"+ tipo +"';";
-        	try {
-        		ResultSet rs=st.executeQuery(s);
-        		while (rs.next())
-        	      {
-        	        String id = rs.getString("CantDinero");
-        	        n = Integer.parseInt(id)+n;
-        	        // print the results
-        	      }
-        		
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	 	} catch (Exception exc){
-	 		exc.printStackTrace();
-	 	}
- 		
- 		return n;
- 	}
- 	
-	/**
+ 	/**
 	*metodo que hace una constulta a la base de datos  sobre el monto de tipo string
 	*@return String con el monto de la base de datos
 	*/
@@ -153,7 +118,7 @@ public class BD {
  		
  		//* Crea el statement
 	 	try {
-			st = conn.createStatement();
+			st = mydb.getCon().createStatement();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -182,7 +147,7 @@ public class BD {
  		return monto;
  	}
  	
-	/**
+ 	/**
 	*Metodo que actualiza los datos de la base de datos
 	*/
 	
@@ -194,7 +159,7 @@ public class BD {
  		monto -= cant;
  		//* Crea el statement
 	 	try {
-			st = conn.createStatement();
+			st = mydb.getCon().createStatement();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -203,7 +168,7 @@ public class BD {
  		//* Hace la consulta
 	 	PreparedStatement updateEXP;
 		try {
-			updateEXP = (PreparedStatement) conn.prepareStatement("update Monto set monto = "+ monto +";");
+			updateEXP = (PreparedStatement) mydb.getCon().prepareStatement("update Monto set monto = "+ monto +";");
 			int updateEXP_done = updateEXP.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -225,7 +190,7 @@ public class BD {
  		updateMonto(cant);
  		
 	 	try {
-			st = conn.createStatement();
+			st = mydb.getCon().createStatement();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -256,7 +221,7 @@ public class BD {
  		monto += cant;
  		//* Crea el statement
 	 	try {
-			st = conn.createStatement();
+			st = mydb.getCon().createStatement();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -265,7 +230,7 @@ public class BD {
  		//* Hace la consulta
 	 	PreparedStatement updateEXP;
 		try {
-			updateEXP = (PreparedStatement) conn.prepareStatement("update Monto set monto = "+ monto +";");
+			updateEXP = (PreparedStatement) mydb.getCon().prepareStatement("update Monto set monto = "+ monto +";");
 			int updateEXP_done = updateEXP.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -276,5 +241,6 @@ public class BD {
  	}
  	
  	
-}
+ 	
 
+}

@@ -58,7 +58,7 @@ public class graph {
 	private JButton btnModificarGasto;
 	private Statement state;
 	private JFreeChart Grafica;
-	private BD mydb;
+	private Calculos operaciones;
 	private JLabel lblMonto;
 	
 	DefaultCategoryDataset datos= new DefaultCategoryDataset();
@@ -94,7 +94,7 @@ public class graph {
 	 */
 	private void initialize() {
 		// Crea la grafica
-		mydb = new BD();
+		operaciones = new Calculos();
 		
 		
 		frame = new JFrame();
@@ -198,7 +198,7 @@ public class graph {
 		lblMonto = new JLabel("");
 		lblMonto.setBounds(422, 261, 200, 50);
 		frame.getContentPane().add(lblMonto);
-		lblMonto.setText(""+mydb.getMonto());
+		lblMonto.setText(""+operaciones.getMonto());
 		
 		
 	}
@@ -212,10 +212,10 @@ public class graph {
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
 					 	try{
-					 	mydb.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
+					 	operaciones.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
 					 	txtNombre.setText("");
-					 	lblMonto.setText(""+mydb.getMonto());
+					 	lblMonto.setText(""+operaciones.getMonto());
 					 	}
 					 	catch(InputMismatchException e1){
 					 		e1.printStackTrace();
@@ -226,7 +226,7 @@ public class graph {
 				 	JFrame grafica = new JFrame("");
 				 	double[] n= new double[4];
 				 	//Esta instruccion es para darle datos a la grafica
-				 	n = mydb.setDraw();
+				 	n = operaciones.setDraw();
 				 	datos.addValue(n[0],"Ocio","Ocio");
 				 	datos.addValue(n[1],"Estudios","Estudios");
 				 	datos.addValue(n[2],"Servicios","Servicios");
@@ -252,8 +252,8 @@ public class graph {
 		        
 		     if (e.getSource() == btnIngresarCantidad) {
 		    	 try{
-		    	 	mydb.aniadirMonto(Integer.parseInt(txtIngreso.getText()));
-		    	 	lblMonto.setText(""+mydb.getMonto());
+		    	 	operaciones.aniadirMonto(Integer.parseInt(txtIngreso.getText()));
+		    	 	lblMonto.setText(""+operaciones.getMonto());
 		    	 }
 		    	 catch(InputMismatchException e1){
 		    		 e1.printStackTrace();

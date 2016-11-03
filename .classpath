@@ -5,5 +5,18 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Librería/jcommon-1.0.23.jar"/>
 	<classpathentry kind="lib" path="Librería/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/jfreechart-1.0.19-demo.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/jfreesvg-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/orsoncharts-1.4-eval-nofx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/orsonpdf-1.6-eval.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jose/Documents/GitHub/Proyecto/Librería/swtgraphics2d.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
