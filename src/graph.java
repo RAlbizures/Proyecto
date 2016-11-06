@@ -212,6 +212,7 @@ public class graph {
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
 					 	try{
+					 		Integer.parseInt(textCant.getText());
 					 	operaciones.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
 					 	txtNombre.setText("");
@@ -220,6 +221,10 @@ public class graph {
 					 	catch(InputMismatchException e1){
 					 		e1.printStackTrace();
 					 		System.err.println("El valor ingresado no es un numero");
+					 		JOptionPane.showMessageDialog(frame,
+					 			    "El valor ingresado no es un numero",
+					 			    "Error",
+					 			    JOptionPane.ERROR_MESSAGE);
 					 	}
 			 } 	
 			 if (e.getSource() == btnGraficar) {
@@ -258,6 +263,10 @@ public class graph {
 		    	 catch(InputMismatchException e1){
 		    		 e1.printStackTrace();
 		    		 System.err.println("El valor ingresado no es un numero");
+		    		 JOptionPane.showMessageDialog(frame,
+		    				    "El valor ingresado no es un numero",
+		    				    "Error",
+		    				    JOptionPane.ERROR_MESSAGE);
 		    	 }
 		        }
 		
