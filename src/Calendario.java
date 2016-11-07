@@ -1,5 +1,5 @@
 import java.time.Year;
-public class calendario {
+public class Calendario {
 	int anio = Year.now().getValue();
 	String mes;
 	String dia;
