@@ -1,7 +1,7 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Connection;
+import com.mysql.*;
 import com.mysql.jdbc.PreparedStatement;
 
 /**
@@ -20,8 +20,14 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class Calculos {
 	
-	private BD mydb = new BD();
+	private BD mydb;
 	private draw grafica;
+
+	public Calculos() {
+		mydb = new BD();
+	}
+
+
 	
 	
 	
@@ -29,6 +35,7 @@ public class Calculos {
 	*Metodo que obtiene el entero de los gastos de la base de datos
 	*@return El entero del gasto
 	*/
+	
 	
  	public int getGasto(java.sql.Statement st,String s ,String tipo){
  		int n=0;

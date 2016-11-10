@@ -212,7 +212,7 @@ public class graph {
 		public void actionPerformed(ActionEvent e) {
 			 if (e.getSource() == btnAniadirGasto) {
 					 	try{
-					 		Integer.parseInt(textCant.getText());
+					 	Integer.parseInt(textCant.getText());
 					 	operaciones.setGasto(Integer.parseInt(textCant.getText()), txtNombre.getText(), cmbTipo.getSelectedItem().toString(), Integer.parseInt(cmbDia.getSelectedItem().toString()), cmbMes.getSelectedItem().toString());
 					 	textCant.setText("");
 					 	txtNombre.setText("");
