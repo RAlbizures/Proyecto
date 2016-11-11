@@ -17,9 +17,9 @@ import com.mysql.jdbc.Statement;
 
 
 public class BD {
-	private String url = "jdbc:mysql://localhost/mydb";
- 	private String us="root";
- 	private String psw= "";
+	private String url;
+ 	private String us;
+ 	private String psw;
  	private Connection conn;
  	private draw grafica;
 	
@@ -28,8 +28,11 @@ public class BD {
 	*/
 	
  	public BD (){
- 		//conn = null;
-	 	getCon();
+ 		
+ 		url = "jdbc:mysql://localhost/mydb";
+ 	 	us="root";
+ 	 	psw= "root";
+
  	}
 	
  	/**
